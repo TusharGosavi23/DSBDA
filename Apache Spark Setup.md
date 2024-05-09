@@ -1,3 +1,11 @@
+#To install Scala 
+1)	sudo apt-get install default-jdk
+ 2) sudo apt-get install scala
+3)	java --version 
+
+
+
+
 # Apache Spark Installation Instructions
 
 Follow these steps to install Apache Spark on your system:
