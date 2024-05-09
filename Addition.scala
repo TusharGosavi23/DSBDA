@@ -1,11 +1,11 @@
 object Addition {
   def main(args: Array[String])= {
     // Input numbers
-    var num1: Int = 5
-    var num2: Int = 7
+    var num1= 5
+    var num2 = 7
 
     // Addition
-    var sum: Int = num1 + num2
+    var sum = num1 + num2
 
     // Output
     println("The sum of " + num1 + " and " + num2 + " is: " + sum)
