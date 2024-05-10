@@ -1,85 +1,182 @@
-**Data Science and Big Data Analytics Practicals**
-
-**1. Data Wrangling, I**
-Perform the following operations using Python on any open source dataset (e.g., data.csv)
-1.	Import all the required Python Libraries.
-2.	Locate an open source data from the web (e.g., https://www.kaggle.com). Provide a clear description of the data and its source (i.e., URL of the web site).
-3.	Load the Dataset into pandas dataframe.
-4.	Data Preprocessing: check for missing values in the data using pandas isnull(), describe() function to get some initial statistics. Provide variable descriptions. Types of variables etc. Check the dimensions of the data frame.
-5.	Data Formatting and Data Normalization: Summarize the types of variables by checking the data types (i.e., character, numeric, integer, factor, and logical) of the variables in the data set. If variables are not in the correct data type, apply proper type conversions.
-6.	Turn categorical variables into quantitative variables in Python.
-
-In addition to the codes and outputs, explain every operation that you do in the above steps and explain everything that you do to import/read/scrape the data set.
 
 
+# Data Science and Big Data Analytics Practicals
 
-**
-2. Data Wrangling II**
-Create an “Academic performance” dataset of students and perform the following operations using Python.
+## Introduction
 
-1.	Scan all variables for missing values and inconsistencies. If there are missing values and/or inconsistencies, use any of the suitable techniques to deal with them.
-2.	Scan all numeric variables for outliers. If there are outliers, use any of the suitable techniques to deal with them.
-3.	Apply data transformations on at least one of the variables. The purpose of this transformation should be one of the following reasons: to change the scale for better understanding of the variable, to convert a non-linear relation into a linear one, or to decrease the skewness and convert the distribution into a normal distribution.
-
-Reason and document your approach properly.
+Welcome to the Data Science and Big Data Analytics practicals! This series of exercises is designed to provide hands-on experience with various data wrangling, descriptive statistics, data analytics, and data visualization techniques using Python and/or R. Each practical focuses on a specific aspect of data analysis and includes detailed instructions, code snippets, and explanations.
 
 
-**3. Descriptive Statistics - Measures of Central Tendency and variability**
-Perform the following operations on any open source dataset (e.g., data.csv)
-1.	Provide summary statistics (mean, median, minimum, maximum, standard deviation) for a dataset (age, income etc.) with numeric variables grouped by one of the qualitative (categorical) variable. For example, if your categorical variable is age groups and quantitative variable is income, then provide summary statistics of income grouped by the age groups. Create a list that contains a numeric value for each response to the categorical variable.
-2.	Write a Python program to display some basic statistical details like percentile, mean, standard deviation etc. of the species of ‘Iris-setosa’, ‘Iris-versicolor’ and ‘Iris-versicolor’ of iris.csv dataset.
+### Libraries Used
 
-Provide the codes with outputs and explain everything that you do in this step.
-**
+1. **pandas**:
+   - **Description**: pandas is a powerful Python library used for data manipulation and analysis. It provides data structures like DataFrame and Series, which are efficient for handling structured data.
+   - **Key Features**:
+     - Data manipulation: DataFrame provides methods for data selection, filtering, aggregation, and transformation.
+     - Missing data handling: pandas offers functions for detecting and handling missing data, such as `isnull()` and `fillna()`.
+     - Data I/O: It supports reading and writing data from various file formats like CSV, Excel, SQL databases, and JSON.
+   - **Website**: [pandas Documentation](https://pandas.pydata.org/docs/)
+
+2. **numpy**:
+   - **Description**: numpy is a fundamental package for scientific computing in Python. It provides support for large, multi-dimensional arrays and matrices, along with a collection of mathematical functions to operate on these arrays.
+   - **Key Features**:
+     - Multi-dimensional array manipulation: numpy arrays are efficient for numerical operations and can be indexed, sliced, and reshaped easily.
+     - Mathematical functions: numpy provides a wide range of mathematical functions for array manipulation, linear algebra, random number generation, and Fourier transforms.
+     - Integration with other libraries: numpy arrays are compatible with pandas, matplotlib, and other scientific computing libraries in Python.
+   - **Website**: [NumPy Documentation](https://numpy.org/doc/)
+
+3. **scikit-learn**:
+   - **Description**: scikit-learn is a versatile Python library for machine learning tasks such as classification, regression, clustering, and dimensionality reduction. It provides simple and efficient tools for data mining and data analysis.
+   - **Key Features**:
+     - Consistent API: scikit-learn offers a unified interface for various machine learning algorithms, making it easy to experiment with different models.
+     - Model evaluation: It provides functions for model evaluation, including metrics for classification, regression, and clustering tasks.
+     - Preprocessing and feature engineering: scikit-learn includes modules for data preprocessing, feature selection, and feature scaling.
+   - **Website**: [scikit-learn Documentation](https://scikit-learn.org/stable/documentation.html)
+
+4. **matplotlib**:
+   - **Description**: matplotlib is a comprehensive library for creating static, animated, and interactive visualizations in Python. It provides a MATLAB-like interface for creating plots and charts.
+   - **Key Features**:
+     - Plotting functions: matplotlib offers a wide range of plotting functions for creating line plots, scatter plots, bar charts, histograms, and more.
+     - Customization: It provides extensive customization options for controlling plot styles, colors, labels, and annotations.
+     - Multiple output formats: matplotlib can generate plots in various formats, including PNG, PDF, SVG, and interactive formats for web applications.
+   - **Website**: [Matplotlib Documentation](https://matplotlib.org/stable/contents.html)
+
+5. **seaborn**:
+   - **Description**: seaborn is a Python visualization library based on matplotlib. It provides a high-level interface for creating informative and attractive statistical graphics.
+   - **Key Features**:
+     - Statistical plots: seaborn offers specialized functions for creating informative statistical plots such as scatter plots, box plots, violin plots, and pair plots.
+     - Integration with pandas: seaborn seamlessly integrates with pandas DataFrames, making it easy to visualize data directly from pandas objects.
+     - Styling and theming: It provides built-in themes and color palettes for enhancing the aesthetics of plots.
+   - **Website**: [Seaborn Documentation](https://seaborn.pydata.org/tutorial.html)
+
+6. **nltk**:
+   - **Description**: NLTK (Natural Language Toolkit) is a leading platform for building Python programs to work with human language data. It provides easy-to-use interfaces to over 50 corpora and lexical resources, along with a suite of text processing libraries for classification, tokenization, stemming, tagging, parsing, and semantic reasoning.
+   - **Key Features**:
+     - Text processing: NLTK offers tools for text tokenization, part-of-speech tagging, named entity recognition, and sentiment analysis.
+     - Corpora and resources: It includes a diverse collection of text corpora and lexical resources for various languages and domains.
+     - Learning algorithms: NLTK provides implementations of popular machine learning algorithms for text classification, clustering, and information retrieval.
+   - **Website**: [NLTK Documentation](https://www.nltk.org/)
+
+---
+
+
+## 1. Data Wrangling I
+
+### Objective:
+Perform data wrangling operations on an open-source dataset.
+
+### Steps:
+1. **Import Libraries**: Begin by importing the required Python libraries for data analysis.
+2. **Data Source**: Locate an open-source dataset from a reputable platform such as Kaggle. Provide a clear description of the dataset and its source URL.
+3. **Data Loading**: Load the dataset into a pandas DataFrame.
+4. **Data Preprocessing**: Check for missing values using `isnull()` and generate initial statistics using `describe()`. Provide variable descriptions and check the dimensions of the DataFrame.
+5. **Data Formatting and Normalization**: Summarize variable types and apply proper type conversions. Convert categorical variables into quantitative ones.
 
 
 
-**4.Data Analytics I****
-Create a Linear Regression Model using Python/R to predict home prices using Boston Housing Dataset (https://www.kaggle.com/c/boston-housing). The Boston Housing dataset contains information about various houses in Boston through different parameters. There are 506 samples and 14 feature variables in this dataset.
+## 2. Data Wrangling II
 
-The objective is to predict the value of prices of the house using the given features.
+### Objective:
+Create an "Academic Performance" dataset of students and perform data cleaning and transformation operations.
 
-
-**5. Data Analytics II**
-1.	Implement	logistic	regression	using	Python/R	to	perform	classification	on Social_Network_Ads.csv dataset.
-2.	Compute Confusion matrix to find TP, FP, TN, FN, Accuracy, Error rate, Precision, Recall
-on the given dataset.
-
+### Steps:
+1. **Missing Values and Inconsistencies**: Scan all variables for missing values and inconsistencies. Use suitable techniques to handle them.
+2. **Outlier Detection**: Scan numeric variables for outliers and apply appropriate techniques to deal with them.
+3. **Data Transformations**: Apply transformations on at least one variable to address issues such as scale change, linearization, or skewness reduction.
 
 
-**6.Data Analytics III**
-1.	Implement Simple Naïve Bayes classification algorithm using Python/R on iris.csv dataset.
-Compute Confusion matrix to find TP, FP, TN, FN, Accuracy, Error rate, Precision, Recall on the given dataset.
+## 3. Descriptive Statistics - Measures of Central Tendency and Variability
 
+### Objective:
+Perform descriptive statistics operations on an open-source dataset.
 
-
-**7.Text Analytics**
-1.	Extract Sample document and apply following document preprocessing methods: Tokenization, POS Tagging, stop words removal, Stemming and Lemmatization.
-2.	Create representation of document by calculating Term Frequency and Inverse Document
-Frequency.
+### Steps:
+1. **Summary Statistics**: Provide summary statistics (mean, median, minimum, maximum, standard deviation) for a dataset with numeric variables grouped by a categorical variable.
+2. **Statistical Details**: Write a Python program to display basic statistical details like percentile, mean, and standard deviation for specific categories in the dataset.
 
 
 
-**8. Data Visualization I**
-1.	Use the inbuilt dataset 'titanic'. The dataset contains 891 rows and contains information about the passengers who boarded the unfortunate Titanic ship. Use the Seaborn library to see if we can find any patterns in the data.
-2.	Write a code to check how the price of the ticket (column name: 'fare') for each passenger
-is distributed by plotting a histogram.
+## 4. Data Analytics I: Linear Regression Model
+
+### Objective:
+Create a Linear Regression Model to predict home prices using the Boston Housing Dataset.
+
+### Steps:
+1. **Dataset Description**: Introduce the Boston Housing Dataset and its features.
+2. **Model Creation**: Implement a Linear Regression Model using Python or R.
+3. **Evaluation**: Evaluate the model's performance and discuss its predictive capabilities.
 
 
 
-**9.Data Visualization II**
-1.	Use the inbuilt dataset 'titanic' as used in the above problem. Plot a box plot for distribution of age with respect to each gender along with the information about whether they survived or not. (Column names : 'sex' and 'age')
-Write observations on the inference from the above statistics.
+## 5. Data Analytics II: Logistic Regression
+
+### Objective:
+Implement logistic regression for classification tasks using Python or R.
+
+### Steps:
+1. **Dataset Description**: Introduce the Social Network Ads Dataset and its features.
+2. **Model Training**: Implement logistic regression for binary classification.
+3. **Evaluation Metrics**: Compute confusion matrix and relevant metrics such as accuracy, precision, recall, and F1-score.
+
+
+---
+
+## 6. Data Analytics III: Naïve Bayes Classification
+
+### Objective:
+Implement Simple Naïve Bayes classification algorithm using Python or R on the Iris dataset.
+
+### Steps:
+1. **Dataset Description**: Introduce the Iris Flower dataset and its features.
+2. **Model Training**: Implement Naïve Bayes classification algorithm.
+3. **Evaluation Metrics**: Compute confusion matrix and relevant metrics such as accuracy, precision, recall, and F1-score.
 
 
 
+## 7. Text Analytics
 
-**10. Data Visualization III**
-Download	the	Iris	flower	dataset	or	any	other	dataset	into	a	DataFrame.	(e.g., https://archive.ics.uci.edu/ml/datasets/Iris ). Scan the dataset and give the inference as:
+### Objective:
+Apply text preprocessing techniques and create document representation using Term Frequency-Inverse Document Frequency (TF-IDF).
 
-1.	List down the features and their types (e.g., numeric, nominal) available in the dataset.
-2.	Create a histogram for each feature in the dataset to illustrate the feature distributions.
-3.	Create a boxplot for each feature in the dataset.
-Compare distributions and identify outliers.
+### Steps:
+1. **Document Preprocessing**: Tokenization, POS Tagging, stop words removal, Stemming, and Lemmatization.
+2. **Document Representation**: Calculate TF-IDF scores for each document.
+
+
+
+## 8. Data Visualization I
+
+### Objective:
+Explore and visualize patterns in the Titanic dataset using Seaborn library.
+
+### Steps:
+1. **Dataset Description**: Introduce the Titanic dataset and its features.
+2. **Data Exploration**: Visualize patterns using Seaborn library.
+3. **Histogram Plot**: Plot a histogram to analyze the distribution of ticket prices.
+
+
+## 9. Data Visualization II
+
+### Objective:
+Visualize the distribution of age with respect to gender and survival status in the Titanic dataset using box plots.
+
+### Steps:
+1. **Dataset Description**: Introduce the Titanic dataset and its features.
+2. **Box Plot Visualization**: Plot box plots to analyze the distribution of age by gender and survival status.
+
+
+
+## 10. Data Visualization III
+
+### Objective:
+Visualize feature distributions and identify outliers in the Iris Flower dataset.
+
+### Steps:
+1. **Dataset Description**: Introduce the Iris Flower dataset and its features.
+2. **Feature Distribution Histograms**: Plot histograms to illustrate feature distributions.
+3. **Box Plots**: Plot box plots to compare feature distributions and identify outliers.
+
+
+---
 
 
